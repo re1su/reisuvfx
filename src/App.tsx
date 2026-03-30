@@ -301,8 +301,8 @@ export default function App() {
             <ResultCard 
               index={3}
               value="100%"
-              label="Проектов сдано вовремя"
-              title="за все время работы"
+              label="Проектов"
+              title="Сдано вовремя"
             />
           </div>
         </div>
