@@ -208,7 +208,7 @@ export default function App() {
               isVertical={true}
               title="Вертикальное видео"
               category="Social Media"
-              videoUrl="../public/videos/1.mp4"
+              videoUrl="public/videos/1.mp4"
             />
             <PortfolioItem 
               index={1}
