@@ -146,9 +146,9 @@ export default function App() {
       <div className="noise-overlay" />
       
       {/* Background Glow Blobs */}
-      <div className="glow-blob top-[-10%] left-[-10%] animate-pulse" />
-      <div className="glow-blob top-[40%] right-[-10%] opacity-50" />
-      <div className="glow-blob bottom-[-10%] left-[20%] animate-pulse" style={{ animationDuration: '8s' }} />
+      <div className="glow-blob top-[-15%] left-[-10%] animate-pulse" />
+      <div className="glow-blob top-[-5%] right-[-5%] opacity-60 animate-pulse" style={{ animationDuration: '6s' }} />
+      <div className="glow-blob top-[10%] left-[20%] opacity-40 animate-pulse" style={{ animationDuration: '10s' }} />
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 apple-blur bg-black/60 border-b border-zinc-800/50">
@@ -324,7 +324,7 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 px-6 bg-zinc-950/50 relative overflow-hidden">
+      <section id="contact" className="pt-32 pb-16 px-6 bg-zinc-950/50 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.05)_0%,transparent_70%)] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
@@ -354,9 +354,9 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-zinc-900 text-center text-zinc-600 text-sm">
+      <footer className="py-4 px-6 border-t border-zinc-900 text-center text-zinc-600 text-xs">
         <p>© {new Date().getFullYear()} REISUVFX. Все права защищены.</p>
-        <p className="mt-2">Минимализм и качество в каждом кадре.</p>
+        <p className="mt-1">Минимализм и качество в каждом кадре.</p>
       </footer>
     </div>
   );
