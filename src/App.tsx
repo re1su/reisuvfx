@@ -208,21 +208,21 @@ export default function App() {
               isVertical={true}
               title="Вертикальное видео"
               category="Social Media"
-              videoUrl="https://picsum.photos/seed/edit1/720/1280"
+              videoUrl="/videos/1.mp4"
             />
             <PortfolioItem 
               index={1}
               isVertical={true}
               title="Вертикальное видео"
               category="Social Media"
-              videoUrl="https://picsum.photos/seed/edit2/720/1280"
+              videoUrl="/videos/2.mp4"
             />
             <PortfolioItem 
               index={2}
               isVertical={true}
               title="Вертикальное видео"
               category="Social Media"
-              videoUrl="https://picsum.photos/seed/edit3/720/1280"
+              videoUrl="/videos/3.mp4"
             />
           </div>
 
@@ -232,7 +232,7 @@ export default function App() {
               index={3}
               title="Проморолик"
               category="Commercial"
-              videoUrl="https://picsum.photos/seed/edit4/1280/720"
+              videoUrl="/videos/promo.mp4"
             />
             <PortfolioItem 
               index={4}
