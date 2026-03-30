@@ -15,9 +15,11 @@ const getYouTubeId = (url: string) => {
 
 const PortfolioItem = ({ title, category, videoUrl, index, isVertical = false }: { title: string, category: string, videoUrl: string, index: number, isVertical?: boolean }) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isHovering, setIsHovering] = React.useState(false);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
   const videoId = getYouTubeId(videoUrl);
-  const isLocalVideo = !videoId && (videoUrl.endsWith('.mp4') || videoUrl.endsWith('.webm') || videoUrl.startsWith('/'));
-  const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : (isLocalVideo ? '' : videoUrl);
+  const isLocalVideo = !videoId && (videoUrl.endsWith('.mp4') || videoUrl.endsWith('.webm') || videoUrl.includes('videos/'));
+  const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null;
   
   return (
     <motion.div 
@@ -25,10 +27,12 @@ const PortfolioItem = ({ title, category, videoUrl, index, isVertical = false }:
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: index * 0.1 }}
-      className={`group relative w-full overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 card-glow ${isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      className={`group relative w-full overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 card-glow transition-all duration-500 ${isVertical ? 'aspect-[9/16]' : 'aspect-video'} ${isPlaying ? 'ring-2 ring-accent/50' : ''}`}
     >
       {isPlaying ? (
-        <div className="w-full h-full relative">
+        <div className="w-full h-full relative bg-black">
           {videoId ? (
             <>
               <iframe
@@ -38,7 +42,6 @@ const PortfolioItem = ({ title, category, videoUrl, index, isVertical = false }:
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               ></iframe>
-              {/* Protective overlays to block YouTube's external links */}
               <div className="absolute top-0 left-0 w-full h-16 z-10 cursor-default" onClick={(e) => e.stopPropagation()}></div>
               <div className="absolute bottom-0 right-0 w-24 h-12 z-10 cursor-default" onClick={(e) => e.stopPropagation()}></div>
             </>
@@ -57,31 +60,48 @@ const PortfolioItem = ({ title, category, videoUrl, index, isVertical = false }:
           className="relative w-full h-full cursor-pointer"
           onClick={() => setIsPlaying(true)}
         >
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-all duration-300 z-10">
+          {/* Overlay with info */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 z-20 transition-opacity duration-300">
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <p className="text-accent text-[10px] font-bold mb-1 uppercase tracking-[0.2em]">{category}</p>
+              <h3 className={`${isVertical ? 'text-lg' : 'text-2xl'} font-bold leading-tight text-white group-hover:text-accent transition-colors duration-300`}>{title}</h3>
+            </div>
+          </div>
+
+          {/* Play Button Center */}
+          <div className="absolute inset-0 flex items-center justify-center z-30">
             <motion.div 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-16 h-16 rounded-full bg-accent flex items-center justify-center shadow-xl shadow-accent/20"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: isHovering ? 1 : 0.8, opacity: isHovering ? 1 : 0 }}
+              className="w-20 h-20 rounded-full bg-accent/90 backdrop-blur-sm flex items-center justify-center shadow-2xl shadow-accent/40"
             >
-              <Play className="text-white fill-current ml-1" size={24} />
+              <Play className="text-white fill-current ml-1" size={32} />
             </motion.div>
           </div>
-          {thumbnailUrl ? (
+
+          {/* Video Preview / Thumbnail */}
+          {videoId ? (
             <img 
-              src={thumbnailUrl} 
+              src={thumbnailUrl!} 
               alt={title} 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               referrerPolicy="no-referrer"
             />
           ) : (
-            <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
-              <Play className="text-zinc-700" size={48} />
-            </div>
+            <video 
+              ref={videoRef}
+              src={videoUrl} 
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              muted
+              playsInline
+              preload="metadata"
+              onMouseEnter={(e) => e.currentTarget.play()}
+              onMouseLeave={(e) => {
+                e.currentTarget.pause();
+                e.currentTarget.currentTime = 0;
+              }}
+            />
           )}
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20">
-            <p className="text-accent text-[10px] font-medium mb-0.5 uppercase tracking-widest">{category}</p>
-            <h3 className={`${isVertical ? 'text-base' : 'text-xl'} font-semibold leading-tight`}>{title}</h3>
-          </div>
         </div>
       )}
     </motion.div>
@@ -232,7 +252,7 @@ export default function App() {
               index={3}
               title="Проморолик"
               category="Commercial"
-              videoUrl="/public/videos/promo.mp4"
+              videoUrl="videos/promo.mp4"
             />
             <PortfolioItem 
               index={4}
