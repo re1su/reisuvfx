@@ -208,21 +208,21 @@ export default function App() {
               isVertical={true}
               title="Вертикальное видео"
               category="Social Media"
-              videoUrl="./videos/1.mp4"
+              videoUrl="videos/1.mp4"
             />
             <PortfolioItem 
               index={1}
               isVertical={true}
               title="Вертикальное видео"
               category="Social Media"
-              videoUrl="/public/videos/2.mp4"
+              videoUrl="videos/2.mp4"
             />
             <PortfolioItem 
               index={2}
               isVertical={true}
               title="Вертикальное видео"
               category="Social Media"
-              videoUrl="/public/videos/3.mp4"
+              videoUrl="videos/3.mp4"
             />
           </div>
 
