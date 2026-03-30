@@ -252,7 +252,7 @@ export default function App() {
               index={3}
               title="Проморолик"
               category="Commercial"
-              videoUrl="videos/promo.mp4"
+              videoUrl="videos/Promo.mp4"
             />
             <PortfolioItem 
               index={4}
