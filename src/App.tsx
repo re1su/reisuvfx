@@ -387,7 +387,7 @@ export default function App() {
               index={3}
               title={t.work.titles.promo}
               category={t.work.categories.commercial}
-              videoUrl="videos/promo.mp4"
+              videoUrl="videos/Promo.mp4"
               thumbnail="thumbnails/promo.jpg" // Put your thumbnail here: public/thumbnails/promo.jpg
             />
             <PortfolioItem 
