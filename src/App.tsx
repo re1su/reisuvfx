@@ -335,7 +335,7 @@ export default function App() {
               {t.hero.description}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <CTAButton primary href="https://t.me/reisuvfx">
+              <CTAButton primary href="https://t.me/re1suvfx">
                 {t.hero.ctaPrimary} <ChevronRight className="ml-2" size={18} />
               </CTAButton>
               <CTAButton href="#work">{t.hero.ctaSecondary}</CTAButton>
@@ -399,7 +399,7 @@ export default function App() {
           </div>
 
           <div className="text-center mt-20">
-            <CTAButton primary href="https://t.me/reisuvfx">
+            <CTAButton primary href="https://t.me/re1suvfx">
               {t.work.cta}
             </CTAButton>
           </div>
@@ -496,7 +496,7 @@ export default function App() {
             
             <div className="flex flex-col items-center space-y-6">
               <motion.a 
-                href="https://t.me/reisuvfx" 
+                href="https://t.me/re1suvfx" 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 className="flex items-center space-x-4 bg-[#0088cc] hover:bg-[#0077b5] text-white px-10 py-5 rounded-2xl text-xl font-bold transition-all transform"
